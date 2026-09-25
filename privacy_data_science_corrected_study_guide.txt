@@ -1,0 +1,317 @@
+PRIVACY, FAIRNESS AND RESPONSIBLE DATA SCIENCE
+A field guide to the ideas, their limits, and how they connect
+
+INTRODUCTION
+Data science is never only about data and models. Decisions about what to collect, what to predict, and what to do with a prediction affect people's privacy, opportunities, and ability to challenge decisions. This guide explains the central concepts and shows how they fit together. It is an educational resource, not legal or clinical advice.
+
+======================================================================
+1. WHY PRIVACY MATTERS
+======================================================================
+
+1.1 Privacy has several dimensions
+Privacy is about the boundaries that govern access to people, places, information, and decisions. There is no single definition that captures every privacy interest. Three useful dimensions are:
+
+- Spatial privacy: protection against unwanted access to a person's body or physical spaces, such as a home or room.
+- Informational privacy: appropriate limits on collecting, inferring, using, and sharing information about a person. Inferences matter too; a person need not have disclosed a fact for a system to infer it.
+- Decisional privacy: room to make intimate or life-shaping choices without unjustified interference. Governments can restrict that freedom, but so can employers, platforms, and other powerful actors.
+
+These dimensions often overlap. A camera in someone's home intrudes on a private space and creates personal data. A prediction about a person's reproductive health affects both informational privacy and the choices they may be able to make. [S1]
+
+1.2 Privacy as limited access and as control
+Two influential accounts emphasize different parts of privacy:
+
+- The access account asks whether another person or organization can obtain access to someone or information about them.
+- The control account asks whether the person has meaningful authority over whether, how, and by whom that access occurs.
+
+Neither account settles every case. Control is weak when a person does not know what is happening or has no practical way to refuse. And once information has been disclosed, a person may lose privacy even if they agreed to share it. These are philosophical ways of understanding privacy, not legal tests for GDPR compliance. [S1]
+
+1.3 Contextual integrity: appropriate information flows
+Privacy does not require information to stay secret in every situation. It asks whether information is flowing appropriately for its context. Consider who the information is about, who sends it, who receives it, what is shared, and under what conditions. Sharing a diagnosis with a treating physician is different from selling the same diagnosis to an advertiser. [S1]
+
+1.4 What privacy makes possible
+Privacy can support autonomy, dignity, intimacy, trust, self-expression, experimentation, dissent, and participation in public life. These are reasons to value privacy, not guaranteed outcomes of every privacy rule. When people believe they are being watched or profiled, they may avoid lawful speech or behavior. This is called a chilling effect; its strength depends on the circumstances and on what people believe the consequences may be. [S1]
+
+1.5 Information asymmetry
+Information asymmetry exists when one party knows much more than another about a decision, service, or risk. The less-informed party may struggle to make a genuine choice or challenge an outcome. Deliberate concealment or deception makes the problem worse, but an imbalance can exist without either. Clear notices, useful explanations, and ways to contest decisions can help; a notice alone rarely removes a large power imbalance.
+
+Connections
+- Contextual integrity → informational privacy: it helps judge whether a particular use or disclosure fits its context.
+- Surveillance → chilling effect: perceived monitoring can discourage some people from speaking or acting freely.
+- Information asymmetry → meaningful choice: people cannot weigh options well when important facts or consequences are hidden from them.
+- Privacy → autonomy and dignity: privacy can give people room to form views and make personal decisions.
+
+======================================================================
+2. DATA PROTECTION LAW AND PRACTICE
+======================================================================
+
+2.1 What the GDPR covers
+The EU General Data Protection Regulation (GDPR) governs the processing of personal data about identified or identifiable living people, subject to its scope and exceptions. Names, email addresses, online identifiers, and pseudonyms that can be linked back to a person may all be personal data. Removing names does not necessarily make a dataset anonymous. Pseudonymized data normally remain personal data; genuinely anonymous information falls outside the GDPR. [S2]
+
+2.2 Principles and legal bases
+The GDPR's Article 5 principles require personal data to be processed lawfully, fairly, and transparently; collected for specified purposes; limited to what is necessary; kept accurate and only as long as needed; and protected for confidentiality and integrity. Organizations must also be able to demonstrate compliance (accountability).
+
+Article 6 requires a valid legal basis for processing. Consent is one possible basis, not a universal requirement. Health, genetic, and other special-category data have additional protections under Article 9, including a requirement for an applicable condition. The obligations depend on the data, purpose, organizations involved, and applicable law. [S2]
+
+2.3 Information for people
+The GDPR requires information about data processing to be concise, understandable, easy to find, and written in clear language. Articles 13 and 14 address data collected from the person and data obtained from another source. Which information must be provided, and when, depends on the circumstances; notice duties can apply even when data were not collected directly from the person. [S2]
+
+2.4 Automated decisions and explanations
+The GDPR does not give everyone an unconditional right to an explanation of every algorithm. Articles 13(2)(f), 14(2)(g), and 15(1)(h) require meaningful information about the logic involved, as well as the significance and envisaged consequences, in the specified context of automated decision-making covered by Article 22.
+
+Article 22 concerns a decision based solely on automated processing, including profiling, that has legal or similarly significant effects on a person. The rule has exceptions and safeguards. Rubber-stamping a model's recommendation may not count as meaningful human involvement; a decision that uses AI is not automatically a solely automated decision. Other transparency obligations may apply outside Article 22. [S2]
+
+In its 2025 Dun & Bradstreet Austria judgment, the Court of Justice of the EU clarified what meaningful information can require in a case under Article 15(1)(h). A person should be able to understand the procedure and principles actually used, including how their personal data affected the result, well enough to challenge it. Providing source code or an opaque formula on its own is not enough. Trade-secret claims must be balanced against the person's access rights; they do not automatically remove those rights. [S3]
+
+2.5 What this means for system design
+Before processing personal data, define the purpose and legal basis; map the data, recipients, and access; collect only what is needed; set retention periods and security controls; and determine whether a data-protection impact assessment is required. Protect raw data even when publishing only statistics. Explanations, logs, and model outputs can themselves contain personal data. Choosing a privacy-enhancing technology does not by itself establish GDPR compliance. [S2][S4]
+
+2.6 Law enforcement
+Processing by competent authorities for preventing, investigating, detecting, or prosecuting crime is generally governed by the EU Law Enforcement Directive and national implementing law, rather than the ordinary GDPR regime. Check the applicable rules before applying GDPR provisions such as Article 22 to a policing example. [S2]
+
+Connections
+- Data protection law → informational privacy: it sets rules for how personal data may be processed.
+- Data minimization → privacy risk: collecting and retaining less data can reduce exposure and misuse.
+- Transparency → accountability: clear records and explanations help people and auditors scrutinize processing.
+- Article 22 → explanation and human oversight: covered decisions carry specific safeguards and information duties.
+- Privacy-enhancing technology → governance: technical safeguards support, but do not replace, lawful purpose, security, and accountability.
+
+======================================================================
+3. DIFFERENTIAL PRIVACY
+======================================================================
+
+3.1 The basic idea
+Differential privacy (DP) is a mathematical guarantee about a randomized computation or data release. It limits how much the output distribution can change when one protected person's data are added, removed, or changed. The exact meaning of “one person's data” depends on how neighboring datasets are defined.
+
+A common approximate definition says that, for every pair of neighboring datasets D and D' and every set S of possible outputs:
+
+P[M(D) is in S] <= exp(epsilon) * P[M(D') is in S] + delta.
+
+Here, M is the randomized mechanism, epsilon controls the main privacy-loss bound, and delta allows a small probability of additional loss. Pure epsilon-DP sets delta to zero. The guarantee applies in both directions because the definition covers every ordered pair of neighbors. [S4]
+
+3.2 What the guarantee does—and does not—say
+DP limits the additional influence that one person's participation can have on a release. It does not promise that participation can never have an adverse real-world effect. It does not prevent conclusions about a whole group, erase inferences that could already be made from other information, or secure raw data during collection and storage. Background information does not invalidate the mathematical guarantee, but it can still help someone draw sensitive or accurate conclusions about a person. [S4]
+
+3.3 Parameters and design choices
+- Epsilon: for otherwise comparable mechanisms, a smaller epsilon generally means a stronger privacy guarantee and more added noise, which can reduce accuracy.
+- Delta: the permitted relaxation should be chosen and justified, not treated as a harmless technical setting.
+- Protection unit: event-level privacy protects one event or record; person-level privacy protects all of one person's contributions. These can offer very different levels of protection.
+- Composition: repeated releases accumulate privacy loss. A series of dashboards or queries must be assessed together.
+- Sensitivity and contribution limits: bound how much one person's data can change a result, then calibrate the randomization to that bound.
+- Trust model: central DP adds randomness at a trusted data holder before results are released. Local DP randomizes data before the holder receives them, usually with a different privacy–accuracy trade-off.
+
+Example: a platform wants to publish the number of people who cycle to work. If each person's contribution can change the count by at most one, a properly calibrated DP mechanism can limit what the published count reveals about any one person's participation. It does not protect the platform's raw trip records if those records are later leaked. [S4]
+
+3.4 DP, fairness, and governance
+Random noise can affect small groups more than large ones, so a DP release may have different accuracy across populations. Check subgroup error as well as overall utility. Security, lawful processing, and limits on purpose remain necessary. A differentially private release is not automatically GDPR-compliant or fair. [S2][S4]
+
+Connections
+- Differential privacy → disclosure risk: it limits the effect of one person's data on a specified release.
+- Privacy budget → repeated analysis: composition means multiple releases must be considered together.
+- Differential privacy → accuracy: stronger privacy can require more noise and reduce utility.
+- Differential privacy → fairness evaluation: noise can affect small groups differently, so examine subgroup error.
+- Differential privacy → data security: it protects specified outputs, not the raw dataset held by an organization.
+
+======================================================================
+4. EXPLANATION, TRANSPARENCY, AND ACCOUNTABILITY
+======================================================================
+
+4.1 Related terms, different questions
+- Transparency asks whether relevant information about the actors, data, purposes, processes, limits, and decisions is available and understandable. It does not require publishing source code or exposing confidential personal data.
+- Interpretability describes how readily a person can understand a model's behavior or internal structure. What counts as understandable depends on the audience and the task.
+- Explainability is the ability to give understandable and faithful reasons or evidence for a model output or decision. A feature-importance score, a counterfactual example, and a clinician's rationale answer different questions.
+- Justifiability asks whether the system's purpose, design, deployment, process, and outcomes can be defended on ethical, legal, and empirical grounds. An explanation cannot make an unjustified decision acceptable.
+- Epistemic accessibility describes how readily people can obtain and understand relevant knowledge. Documentation, independent review, clear accounts of uncertainty, and the ability to challenge a decision can all contribute.
+- A black box is a system whose relevant workings are difficult for a particular observer to inspect or understand. Opacity may come from technical complexity, secrecy, or missing documentation; these are different problems.
+
+4.2 Accuracy and interpretability
+There is no universal law that a more complex model is always more accurate and less interpretable. Measure performance on the task at hand. Also check whether an explanation reflects the model's actual behavior: some post-hoc explanations are approximations and can be misleading. [S5]
+
+4.3 FAT, FACT, and FAST
+These acronyms are useful course mnemonics, not universal standards:
+- FAT: fairness, accountability, and transparency.
+- FACT: fairness, accuracy, confidentiality, and transparency.
+- FAST: fairness, accountability, sustainability, and transparency.
+
+Other concerns—privacy, security, robustness, accessibility, recourse, and institutional responsibility—matter even when an acronym leaves them out. Confidentiality means preventing unauthorized access; privacy also concerns whether information is collected and used appropriately.
+
+4.4 A practical test for explanations
+Ask three questions. Can the affected person understand what was decided and what they can challenge? Can an operator check inputs, recognize failure, and understand when the model should not be used? Can an auditor reconstruct the model version, data, thresholds, and human interventions? Tailor the explanation to the audience and the stakes. For automated decisions covered by the GDPR, apply the specific duties described in Section 2.4. [S3][S5]
+
+Connections
+- Transparency → epistemic accessibility: information must be available in a form people can use.
+- Interpretability → explainability: understanding a model's structure is related to, but not the same as, explaining a particular result.
+- Explainability → contestability: people need reasons they can question, not just a technical output.
+- Explanation → justifiability: reasons can inform scrutiny, but do not by themselves justify a decision.
+- Accountability → documentation: records make it possible to reconstruct and review how a system was used.
+
+======================================================================
+5. RESPONSIBILITY, FORESEEABILITY, AND DUAL USE
+======================================================================
+
+5.1 Different kinds of responsibility
+- Forward-looking responsibility means duties to anticipate risks, prevent harm, monitor a system, and respond when problems arise.
+- Backward-looking responsibility concerns who should answer for something that has happened. It may involve moral blame, legal liability, or a duty to explain; these are related but distinct.
+- Active responsibility means taking on a role in securing a future outcome. People and organizations can also take active steps to investigate and repair past harm.
+- Passive responsibility means being held to account by others. It is a useful conceptual distinction, not a claim that people cannot assess their own conduct.
+
+5.2 Knowledge, control, and blame
+Many accounts of moral blame ask what a person knew—or reasonably should have known—and how much control they had over the outcome. These questions help assess responsibility but do not form a complete formula that applies to every case. An organization may still have a duty to investigate and remedy harm even when no one person's blame has been established. Legal liability depends on the applicable law.
+
+5.3 Dual use
+A technology has dual-use potential when it can serve beneficial purposes and also be used to cause harm. The harmful use may be intended, foreseeable, or difficult to anticipate; “unintended use” alone does not define dual use. Researchers and organizations should consider plausible misuse, who could be affected, and whether access or capabilities can be limited proportionately. Document risks and mitigations, consult relevant experts, and follow applicable reporting rules. Speculative risks alone do not automatically require stopping all research.
+
+5.4 Precaution and the control dilemma
+Absolute certainty of safety is rarely possible. A practical precautionary approach weighs plausible benefits and harms, uncertainty, and whether consequences can be reversed. Potentially severe or irreversible harms call for greater care. There is no single formula for balancing these factors.
+
+The dilemma of control describes a timing problem: early in a technology's development, it is easier to change course but harder to predict its effects; after it becomes widely established, there is more evidence but change is harder. Reversible pilots, staged rollouts, ongoing monitoring, and pre-agreed stop conditions help address this problem.
+
+5.5 The problem of many hands
+Harm can emerge from the combined work of data collectors, labelers, developers, managers, vendors, deployers, and decision-makers. When many people contribute, it can be hard to see who had the power or duty to act. That does not mean nobody is responsible. Decide in advance who can stop deployment, handle complaints, investigate incidents, and arrange remedies. Keep records of decisions and interventions. Responsibility should reflect authority and control, not just how much code someone wrote. Shared responsibility should add to, not replace, individual and organizational accountability.
+
+Connections
+- Foreseeability → forward-looking responsibility: foreseeable risks create reasons to prevent, monitor, and prepare for harm.
+- Dual use → precaution: plausible beneficial and harmful uses call for proportionate safeguards.
+- Precaution → reversible deployment: staged tests preserve the ability to change course as evidence improves.
+- Problem of many hands → accountability: clear roles and records prevent shared work from obscuring who must act.
+- Responsibility → remedy: organizations may need to address harm even when individual blame is uncertain.
+
+======================================================================
+6. BIAS, FAIRNESS, AND JUSTICE
+======================================================================
+
+6.1 Different sources of bias
+Statistical bias is systematic error in an estimate. Social or discriminatory bias describes patterns of disadvantage. They can interact, but they are not the same thing. NIST groups AI bias into systemic, computational/statistical, and human-cognitive sources. Unfair outcomes can occur without anyone intending to discriminate. [S5]
+
+- Implicit bias: attitudes or associations can influence behavior without deliberate intent. This is one possible human source of bias, not a complete explanation of structural inequality.
+- Sampling or selection bias: the data do not represent the population or situation the system is meant to address because inclusion or observation is uneven. Different group sizes alone do not prove a system is unfair; first define the target population and question.
+- Label or measurement bias: the recorded measure does not match the outcome of interest, or measures it differently across groups. For example, arrest records do not capture all crimes committed; policing practices affect whose behavior is recorded.
+- Algorithmic or optimization bias: choices about targets, features, loss functions, thresholds, evaluation, or deployment can create or amplify unequal outcomes, even when a dataset appears balanced.
+- Interaction bias: users and systems can influence each other over time. Users may also deliberately manipulate a public-facing system. Microsoft's Tay chatbot is one illustration of this interaction, not a definition of the concept.
+- Filter bubbles and feedback loops: personalization can repeatedly expose people to similar material, while system outputs can shape the data collected next. These effects are possible, not inevitable. “Emergent bias” has other meanings in the literature, so use the more specific term that fits the case.
+
+6.2 Different ideas of fairness
+Fairness can refer to several different principles. They should not be treated as interchangeable or as formulas that settle every case.
+
+- Equality usually means applying the same rule or distributing the same resources. Identical treatment does not always give people an equal opportunity to benefit.
+- Equity adapts support to different circumstances to reduce unjust disadvantage. “Give people what they need” is a useful starting point, but needs and remedies still have to be defined.
+- Justice examines institutions and the causes of disadvantage, not only how resources are distributed at one moment. Removing one barrier does not by itself make a whole system just.
+- Merit or deservedness distributes opportunities or rewards according to selected criteria. Those criteria should be examined because unequal opportunities can shape what looks like merit.
+- Need prioritizes unmet needs. It does not, by itself, specify how costs must be shared; that requires an additional principle.
+- “Reality” is a teaching illustration of unequal starting resources, not a standard technical or philosophical category.
+
+6.3 Rawls: justice as fairness
+Rawls's first principle protects an equal scheme of basic liberties. His second principle requires fair equality of opportunity and permits social and economic inequalities only when they benefit the least advantaged (the difference principle). The principles have a priority order; the difference principle is not a license to maximize total welfare at any cost. A useful critique asks whether Rawls's framework and institutional assumptions adequately address particular histories of oppression and forms of relational inequality. Saying simply that he “ignores context” misses important complexity. [S6]
+
+6.4 Group and individual fairness
+- Group fairness compares outcomes or errors between defined groups. Demographic parity compares positive decision rates. Equalized odds compares both true-positive and false-positive rates across groups, conditional on the true outcome.
+- Individual fairness asks whether people who are similar in morally relevant ways receive similar treatment. It depends on a defensible measure of similarity; features that look neutral may encode historical disadvantage.
+
+No single metric proves that a system is just. Under common assumptions, when outcome rates differ between groups and a predictor is imperfect, it is generally impossible to satisfy certain combinations of calibration (or predictive parity) and equalized odds at the same time. Choose and justify metrics according to the decision, likely harms, and affected people—not merely because a dashboard makes them easy to calculate. [S7]
+
+6.5 Five sociotechnical traps
+Selbst and colleagues describe five traps that arise when fairness is reduced to a technical problem detached from its social setting: [S8]
+
+1. Framing trap: the model or data boundaries leave out important people, institutions, or impacts.
+2. Portability trap: a solution validated in one setting is moved to another without checking local conditions.
+3. Formalism trap: a mathematical fairness measure is mistaken for the whole, contested social meaning of fairness.
+4. Ripple-effect trap: introducing a system changes behavior, incentives, or the problem being measured.
+5. Solutionism trap: a technical tool is assumed to be necessary when a policy change, better service, more staff, or no deployment may be better.
+
+The goal is a fairer process for defining the problem, involving affected people, evaluating options, and monitoring real outcomes—not only a fair-looking model score. For example, a hiring screener can produce similar scores across groups and still contribute to unfair hiring if job adverts reach groups unevenly, interviewers override scores differently, or applicants cannot access accommodations. [S8]
+
+Connections
+- Sampling bias → measurement bias: who is observed affects which outcomes become available as labels.
+- Historical data → feedback loops: past decisions shape future records, which can then reinforce those decisions.
+- Fairness metrics → value choices: each metric captures some concerns and leaves others out.
+- Model fairness → sociotechnical fairness: outcomes also depend on institutions, users, and how a tool is deployed.
+- Justice → problem framing: addressing root causes may require changing a process rather than adjusting a model.
+
+======================================================================
+7. HIGH-STAKES APPLICATIONS
+======================================================================
+
+7.1 Medicine: prediction and precision
+Precision medicine uses genomic, environmental, lifestyle, and other relevant clinical information to guide prevention, diagnosis, or treatment. It does not mean every patient receives a wholly unique therapy. Predictive medicine estimates risks or likely responses to support decisions; a prediction is uncertain, not a definite account of one person's future.
+
+Before relying on a medical model, examine external validation, calibration, performance across relevant groups, and whether using it improves clinical outcomes. Consider false positives and false negatives, privacy, and the appropriate legal basis for using the data. [S9]
+
+7.2 Four principles of medical ethics
+- Autonomy: support informed choices and respect patients' preferences. The rules for consent depend on the intervention and applicable law.
+- Beneficence: act for the patient's benefit.
+- Non-maleficence: avoid or reduce harm, including foreseeable harm; it is broader than a ban on intentional injury.
+- Justice: consider fair access, how burdens are shared, and whose needs go unmet.
+
+These principles can conflict. They do not replace clinical evidence, professional duties, or law. For AI in health, the WHO also emphasizes human autonomy, safety and well-being, transparency and intelligibility, accountability, inclusiveness, and sustainability. [S10]
+
+7.3 Trust, expertise, and explanations
+Social epistemology studies how knowledge depends on other people and institutions—for example, on expertise, testimony, and trust. Patients often rely on clinicians' knowledge, but they still need information they can use to accept or refuse care. Trust is earned through competence, evidence, communication, and accountability, not blind deference.
+
+AI systems are not human professional peers: they do not hold professional obligations or deliberate as people do. Still, model predictions can be tested against evidence, and some systems can provide useful rationales. A confidence score alone is not a clinical explanation. A clinician's nominal authority is not enough if they cannot understand, question, override, or safely disregard a tool. Healthcare organizations, clinicians, developers, and deployers need clear responsibilities. [S10]
+
+7.4 Predictive policing
+Predictive policing uses statistical methods to forecast crime-related events, places, or people, depending on the system. Claims that it will make better use of resources or reveal patterns should be tested against suitable baselines; they are not automatic benefits.
+
+Risks include feedback loops in recorded crime, discriminatory surveillance, false accusations, privacy harms, limited transparency, and unclear responsibility. A system may reduce some forms of discretionary human error while still encoding historical bias. [S5][S8]
+
+Before deployment, ask: What exactly is being predicted—reported crime, arrests, victimization, or incidents that occurred? Who is missing from the data? What action follows a score? Who can see or challenge it? Is the use lawful, necessary, and proportionate? Would a non-technical intervention work better?
+
+The EU AI Act prohibits certain individual criminal-offence risk assessments based solely on profiling or personality traits. It provides a narrow exception when an assessment supports a human assessment based on objective and verifiable facts directly linked to criminal activity. Some other law-enforcement AI uses are classified as high-risk. Which rules apply depends on the system, purpose, and relevant dates. Effective oversight, training, access controls, incident review, and routes to challenge matter alongside explanations. [S11]
+
+Connections
+- Medical prediction → uncertainty: a risk estimate informs care but does not determine an individual future.
+- Medical AI → human oversight: clinicians need the ability and practical authority to question or reject recommendations.
+- Patient autonomy → explanation: people need usable information to make informed choices.
+- Predictive policing → measurement bias: recorded crime reflects what institutions observe and record, not every incident.
+- Predictive policing → feedback loops: directing attention to a place can generate more records there and reinforce later predictions.
+- High-stakes decisions → accountability: clear responsibility and a route to challenge are essential when errors can seriously affect people.
+
+======================================================================
+8. A PRACTICAL DECISION FRAMEWORK
+======================================================================
+
+For any data-science project involving people, write down clear answers to these questions:
+
+1. Purpose: What problem are we trying to solve, who benefits, and is a machine-learning system needed?
+2. Data: Who was included or left out? How were labels created? Could missing data or collection practices reflect unequal access or surveillance?
+3. Rights and law: What is the legal basis and permitted purpose? What information, retention limits, special-category conditions, and sector rules apply?
+4. Privacy: Are the main risks unauthorized access, reidentification, inference, sensitive aggregates, tracking, or misuse? Which safeguards address each one?
+5. Evaluation: Has the system been tested for accuracy, calibration, and uncertainty across relevant populations? Are the fairness criteria appropriate to the decision and its harms?
+6. Human process: Who makes the decision, understands the limits, can override the system, hears appeals, and is responsible for the process?
+7. Deployment: Can the system be piloted and reversed? How will drift, outcomes, access, complaints, and changes be monitored? What would trigger a pause or stop?
+
+Example: A retailer forecasts demand from purchase histories. Restricting database access helps protect raw records. Aggregation or differential privacy can reduce what a published dashboard reveals. Data minimization and retention limits address other privacy and legal risks. Checking prediction error by neighborhood and product category can reveal whether the system systematically underserves a community. Each safeguard addresses a different risk; none replaces the others.
+
+How the ideas fit together
+- Privacy identifies interests at stake; data protection law sets duties for handling personal data.
+- Privacy-enhancing techniques such as differential privacy can reduce particular disclosure risks, while governance and security address other risks.
+- Fairness depends on the data, model, decision process, and institutions around it.
+- Explanations support understanding and challenge; accountability assigns responsibility for acting on what those explanations reveal.
+- Responsible deployment combines careful problem framing, proportionate safeguards, evaluation, oversight, and a willingness to change course.
+
+======================================================================
+SOURCE KEY
+======================================================================
+[S1] Stanford Encyclopedia of Philosophy, “Privacy”:
+https://plato.stanford.edu/entries/privacy/
+[S2] Regulation (EU) 2016/679, General Data Protection Regulation (especially Recital 26; Articles 5, 6, 9, 12–15, 22, 25, 32, and 35):
+https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+[S3] Court of Justice of the European Union, press release on C-203/22, Dun & Bradstreet Austria, 27 February 2025:
+https://curia.europa.eu/jcms/upload/docs/application/pdf/2025-02/cp250022en.pdf
+[S4] NIST Special Publication 800-226, “Guidelines for Evaluating Differential Privacy Guarantees” (2025):
+https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-226.pdf
+[S5] NIST AI Risk Management Framework, AI 100-1:
+https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf
+[S6] Stanford Encyclopedia of Philosophy, “John Rawls”:
+https://plato.stanford.edu/entries/rawls/
+[S7] Stanford Encyclopedia of Philosophy, “Algorithmic Fairness”:
+https://plato.stanford.edu/entries/algorithmic-fairness/
+[S8] Selbst et al. (2019), “Fairness and Abstraction in Sociotechnical Systems”:
+https://sorelle.friedler.net/papers/sts_fat2019.pdf
+[S9] National Human Genome Research Institute, “Precision Medicine”:
+https://www.genome.gov/genetics-glossary/Precision-Medicine
+[S10] World Health Organization, “Ethics and Governance of Artificial Intelligence for Health” (2021):
+https://www.who.int/publications/i/item/9789240029200
+[S11] European Commission, “Navigating the AI Act” FAQ (consult the latest official text for a specific use):
+https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act
+
+NOTE: This guide is for education. Legal conclusions depend on the facts, jurisdiction, applicable national law, and current statutory text. Clinical decisions require qualified professional judgment.

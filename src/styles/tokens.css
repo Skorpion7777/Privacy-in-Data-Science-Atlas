@@ -1,0 +1,55 @@
+:root {
+  /* Warm editorial canvas */
+  --bg-app: #f4f5f1;
+  --bg-gradient: radial-gradient(circle at 78% 0%, #ffffff 0, #f4f5f1 46rem);
+  --bg-glass: rgba(255, 255, 255, 0.94);
+  --bg-glass-card: #ffffff;
+  --bg-glass-hover: #f8faf8;
+  --bg-glass-active: #edf5f2;
+  --bg-reading-surface: #ffffff;
+  --bg-overlay: rgba(25, 35, 39, 0.34);
+
+  /* Borders and depth */
+  --border-subtle: #e7eae5;
+  --border-glass: #e1e6e0;
+  --border-glass-strong: #cbd5ce;
+  --border-accent: rgba(24, 105, 98, 0.35);
+  --shadow-glass: 0 18px 50px -28px rgba(31, 41, 35, 0.24), 0 3px 12px rgba(31, 41, 35, 0.04);
+  --shadow-node: 0 5px 18px -10px rgba(31, 41, 35, 0.24);
+  --shadow-glow: 0 0 0 4px rgba(24, 105, 98, 0.08);
+
+  /* Typography */
+  --font-serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  /* High-contrast ink */
+  --text-primary: #202b2a;
+  --text-secondary: #465452;
+  --text-muted: #586a64;
+  --text-faint: #61716a;
+  --text-accent: #176b63;
+  --color-warning: #a34b38;
+  --color-positive: #28734e;
+
+  /* Muted, readable topic accents */
+  --cluster-foundations: #176b87;
+  --cluster-gdpr: #4a5c9e;
+  --cluster-dp: #704c9a;
+  --cluster-transparency: #176d64;
+  --cluster-responsibility: #95601d;
+  --cluster-bias: #a14e58;
+  --cluster-fairness: #984873;
+  --cluster-stakes: #347452;
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 240ms ease;
+}
+
+@supports not (backdrop-filter: blur(12px)) {
+  :root {
+    --bg-glass: #ffffff;
+    --bg-glass-card: #ffffff;
+    --bg-glass-hover: #f8faf8;
+  }
+}

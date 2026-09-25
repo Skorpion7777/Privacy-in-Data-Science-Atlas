@@ -1,0 +1,81 @@
+import { Source } from './types';
+
+export const sources: Source[] = [
+  {
+    id: 'S1',
+    title: 'Privacy',
+    authorOrInstitution: 'Stanford Encyclopedia of Philosophy',
+    url: 'https://plato.stanford.edu/entries/privacy/',
+    contextualNote: 'Foundational philosophical treatment of privacy dimensions, access vs control accounts, contextual integrity, and the ethical values protected by privacy boundaries.',
+  },
+  {
+    id: 'S2',
+    title: 'Regulation (EU) 2016/679 (General Data Protection Regulation)',
+    authorOrInstitution: 'European Parliament and Council of the European Union',
+    url: 'https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng',
+    contextualNote: 'Official text of the GDPR, with particular relevance to Recital 26 (identifiability/anonymity), Article 5 (principles), Article 6 (legal bases), Article 9 (special categories), Articles 12–15 (transparency and access), Article 22 (automated decision-making), Article 25 (data protection by design), and Article 35 (DPIA).',
+  },
+  {
+    id: 'S3',
+    title: 'Press release on Case C-203/22, Dun & Bradstreet Austria',
+    authorOrInstitution: 'Court of Justice of the European Union (CJEU)',
+    url: 'https://curia.europa.eu/jcms/upload/docs/application/pdf/2025-02/cp250022en.pdf',
+    contextualNote: 'Clarifies that under GDPR Article 15(1)(h), controllers must explain the procedure and principles actually applied in automated decisions so individuals can understand which personal data were used, how they influenced the outcome, and can challenge the result.',
+  },
+  {
+    id: 'S4',
+    title: 'Special Publication 800-226: Guidelines for Evaluating Differential Privacy Guarantees',
+    authorOrInstitution: 'National Institute of Standards and Technology (NIST)',
+    url: 'https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-226.pdf',
+    contextualNote: 'Technical guidance on differential privacy parameters (epsilon, delta), neighbor definitions, sensitivity, composition bounds, empirical privacy audits, and utility trade-offs.',
+  },
+  {
+    id: 'S5',
+    title: 'Artificial Intelligence Risk Management Framework (AI RMF 1.0, NIST AI 100-1)',
+    authorOrInstitution: 'National Institute of Standards and Technology (NIST)',
+    url: 'https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf',
+    contextualNote: 'Taxonomy of AI risks, classifying bias into systemic, computational/statistical, and human-cognitive sources, and setting benchmarks for explainability and risk governance.',
+  },
+  {
+    id: 'S6',
+    title: 'John Rawls',
+    authorOrInstitution: 'Stanford Encyclopedia of Philosophy',
+    url: 'https://plato.stanford.edu/entries/rawls/',
+    contextualNote: 'Examines Rawlsian justice as fairness: the lexical priority of equal basic liberties, fair equality of opportunity, and the difference principle (inequalities must benefit the least advantaged).',
+  },
+  {
+    id: 'S7',
+    title: 'Algorithmic Fairness',
+    authorOrInstitution: 'Stanford Encyclopedia of Philosophy',
+    url: 'https://plato.stanford.edu/entries/algorithmic-fairness/',
+    contextualNote: 'Formal metrics of fairness (demographic parity, equalized odds, calibration), individual fairness formulations, and mathematical impossibility theorems showing inherent trade-offs.',
+  },
+  {
+    id: 'S8',
+    title: 'Fairness and Abstraction in Sociotechnical Systems',
+    authorOrInstitution: 'A. D. Selbst, d. boyd, S. A. Friedler, S. Venkatasubramanian, J. Vertesi (ACM FAT* 2019)',
+    url: 'https://sorelle.friedler.net/papers/sts_fat2019.pdf',
+    contextualNote: 'Identifies the five sociotechnical traps when abstracting fairness into algorithmic pipelines: Framing, Portability, Formalism, Ripple Effect, and Solutionism.',
+  },
+  {
+    id: 'S9',
+    title: 'Precision Medicine',
+    authorOrInstitution: 'National Human Genome Research Institute (NHGRI)',
+    url: 'https://www.genome.gov/genetics-glossary/Precision-Medicine',
+    contextualNote: 'Overview of genomic, environmental, and clinical data integration in targeted therapies and statistical risk scoring.',
+  },
+  {
+    id: 'S10',
+    title: 'Ethics and Governance of Artificial Intelligence for Health',
+    authorOrInstitution: 'World Health Organization (WHO)',
+    url: 'https://www.who.int/publications/i/item/9789240029200',
+    contextualNote: 'Global guidance outlining key ethical principles for AI in health: protecting autonomy, promoting human safety and well-being, ensuring transparency and explainability, fostering responsibility, and guaranteeing equity.',
+  },
+  {
+    id: 'S11',
+    title: 'Navigating the EU AI Act (Legal Framework & FAQs)',
+    authorOrInstitution: 'European Commission',
+    url: 'https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act',
+    contextualNote: 'Risk categorization under the EU AI Act, including prohibited practices (such as individual predictive policing based solely on profiling) and requirements for high-risk AI systems.',
+  },
+];
