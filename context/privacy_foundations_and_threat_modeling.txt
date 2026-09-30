@@ -1,0 +1,159 @@
+# Privacy foundations and threat modeling
+
+A plain-language guide to privacy foundations, threat modeling, and technical safeguards in responsible data systems.
+
+## 1. Security, anonymity and privacy
+
+**Security** is about protecting systems and information from unauthorized access, alteration or disruption. A secure system aims to keep data confidential, accurate and available when needed. It can protect trade secrets as well as personal data. [1]
+
+**Anonymity** means an observer cannot identify a person within a relevant group. It depends on what that observer knows. Removing a name is rarely enough if other details point to one person. [2, 3]
+
+**Privacy** is broader: it concerns appropriate access to people, their information, spaces and choices. A database can be secure while its contents are used in ways people reasonably find intrusive. [1, 4]
+
+*Example:* Encrypting purchase histories helps secure them. Using those histories to infer sensitive traits raises a separate privacy question.
+
+## 2. Data protection versus privacy
+
+Privacy covers more than data. It includes, for instance, being free from unwanted observation at home and having space to make personal decisions. **Data protection** focuses on how personal data are collected, used, shared, stored and deleted. The EU treats respect for private life and protection of personal data as related but distinct rights. [4, 5]
+
+Data protection helps safeguard privacy, but the two are not interchangeable. A company might keep customer records safe from hackers while collecting more information than it needs or using it for an unexpected purpose. [1, 5]
+
+## 3. Privacy-enhancing technologies (PETs)
+
+**PETs** are technical ways to reduce specific privacy risks. Different tools solve different problems: [6]
+
+- **Differential privacy** limits how much one person's data can affect a suitably protected published result. It does not protect an unencrypted source database. [7]
+- **Secure multiparty computation** lets several parties calculate something together without simply pooling all their raw inputs. [6]
+- **Homomorphic encryption** allows certain calculations on encrypted data. What it can do, and at what cost, depends on the method. [6]
+- **Federated learning** trains a model across different data holders without moving all raw records into one place. Model updates may still reveal information. [6]
+- **Pseudonymisation** replaces or separates identifiers. It reduces some risks but does not necessarily make data anonymous. [3]
+
+Start with the problem, then choose the tool. If the concern is a data leak, an impressive method for protecting *published statistics* is not a substitute for securing the raw records. PETs also do not remove the need for a lawful purpose and sensible data governance. [5, 6]
+
+## 4. Different ways to define privacy
+
+There is no single definition that settles every privacy question. These views overlap: [4]
+
+| View | What it asks |
+| --- | --- |
+| **Access** | Who can reach, observe or learn about me? |
+| **Control** | Can I meaningfully decide who gets access and on what terms? |
+| **Contextual integrity** | Does information move in a way that fits the setting? |
+| **Informational privacy** | What can others collect, infer or disclose about me? |
+| **Spatial privacy** | Who can enter or monitor my physical space? |
+| **Decisional privacy** | Can I make personal choices without unjustified interference? |
+
+The first three are ways of *thinking about* privacy. The last three name *areas of life* in which privacy matters. For example, sharing a diagnosis with a doctor but not an advertiser can be understood through control, appropriate context and informational privacy at once. [4]
+
+## 5. Privacy as control
+
+One influential view says privacy depends on having a say over access to yourself and your information. You might tell a friend something you would not tell a colleague; that choice helps you manage different relationships. [4]
+
+But a choice on a screen is not always meaningful control. People may have no realistic alternative to accepting a service's terms. Data can be copied, inferred or combined with someone else's. Privacy design therefore needs more than consent settings: collect less, set reasonable defaults and give organizations responsibility for how they use information. [4, 5]
+
+## 6. Privacy, identity management and security
+
+These three disciplines answer different questions: [1, 8]
+
+| Discipline | Main question | Example |
+| --- | --- | --- |
+| **Identity management** | Which account is this, and how do we verify its user? | Signing in with an authenticator. |
+| **Security** | How do we stop unauthorized access or damage? | Encrypting records and restricting access. |
+| **Privacy** | Is collecting and using the information appropriate? | Keeping only records needed for a stated purpose. |
+
+A medical portal may do all three. It authenticates a patient, protects their records and limits how those records are used. Knowing who someone is can be necessary in some services, but identity management does not always require knowing their legal name. [8]
+
+## 7. Threat modeling
+
+**Threat modeling** means examining a particular system before problems become incidents. First draw its boundaries: who uses it, what data it handles, where those data go and what is worth protecting. Then ask what could go wrong, who could cause it, how serious it would be and what changes would reduce the risk. Revisit the model when the system changes. [9, 10]
+
+A security review might ask, “Could someone steal the customer table?” A privacy review might ask, “Even if only authorized staff can access it, do we need this table at all?” Both questions matter. [1, 10]
+
+## 8. STRIDE
+
+**STRIDE** is a set of prompts for finding security threats: [9]
+
+| Letter | Threat | Example question |
+| --- | --- | --- |
+| **S** | Spoofing | Could someone impersonate a user? |
+| **T** | Tampering | Could someone change a record unnoticed? |
+| **R** | Repudiation | Could someone deny an action the system needs to prove? |
+| **I** | Information disclosure | Could someone see data they should not see? |
+| **D** | Denial of service | Could someone make the service unavailable? |
+| **E** | Elevation of privilege | Could someone gain more access than intended? |
+
+STRIDE helps a team ask better questions; checking all six boxes does not prove that a system is safe. It also does not fully address privacy harms from *authorized* uses of data. [9, 10]
+
+## 9. Repudiation and non-repudiation
+
+To **repudiate** an action is to deny it. In STRIDE, repudiation can be a problem: a payment system, for instance, may need reliable evidence that a transaction took place. **Non-repudiation** means that such an action can be evidenced well enough that the actor cannot plausibly deny it. [9]
+
+Privacy can pull the other way. LINDDUN treats non-repudiation as a possible *privacy threat* if it exposes an action that should remain deniable, such as whistleblowing or a private vote. Neither “always keep an audit trail” nor “never keep evidence” is a sound rule. Decide which actions must be provable, to whom and for how long. [11]
+
+## 10. LINDDUN as a method
+
+**LINDDUN** is a framework for finding privacy threats in a system. Map the people, processes, data stores and information flows; use LINDDUN's threat categories to identify concrete risks; then decide which design or organizational changes would address them. It can be used during design and revisited for an existing system. [10]
+
+LINDDUN **PRO** is a structured approach built around a data-flow diagram. LINDDUN **GO** is a lighter, collaborative approach. They should not be described as identical procedures. A completed privacy-threat model is useful evidence of careful design, not automatic proof of legal compliance. [10, 12, 13]
+
+## 11. LINDDUN's seven threat categories
+
+LINDDUN defines seven core threat categories for privacy analysis: [11]
+
+| Category | Plain-language question |
+| --- | --- |
+| **Linking** | Can separate records or actions be connected? |
+| **Identifying** | Can the person behind data or an action be identified? |
+| **Non-repudiation** | Can a sensitive action be proved when the person needs plausible deniability? |
+| **Detecting** | Can someone tell that a sensitive action or record exists, even without seeing its contents? |
+| **Disclosure of information** | Can personal information reach someone who should not have it? |
+| **Unawareness** | Do people lack a fair understanding of what happens to their data? |
+| **Non-compliance** | Does the processing fail to meet applicable data-protection duties? |
+
+The categories can overlap. Someone may not know a user's name but can still connect months of activity under one account. Simply learning that a person has a record at a particular clinic may be sensitive even without seeing the diagnosis. [11]
+
+## 12. Hard and soft privacy
+
+In a privacy-engineering distinction used in the LINDDUN literature, **hard privacy** tries to avoid disclosing data in the first place. **Soft privacy** assumes some data have been disclosed and relies on the recipient's rules, access controls and accountability to use them properly. These are design approaches, not legal grades of privacy; “soft” does not mean unimportant. [14]
+
+*Example:* Calculating something on a person's device and sending only the result reduces what a service receives. If the service needs the underlying records, it must protect them and limit their use. Most real systems need both: disclose less where possible and govern what must still be disclosed. [13, 14]
+
+## 13. Anonymity, pseudonymity and unlinkability
+
+**Anonymity** asks whether an observer can identify someone among the people who could have performed an action. The relevant group is called an *anonymity set*. Its size matters: hiding a name achieves little if only one person fits the other clues. [2, 15]
+
+**Pseudonymity** replaces a usual identifier with another, such as a handle or customer code. The code might be used once or for years. A stable code can make someone's actions easy to link even if the observer does not know their name. A lookup table or other information may reveal who it belongs to. Pseudonymised records can therefore still be personal data. [3, 15]
+
+**Unlinkability** asks whether an observer can tell that two records or actions concern the same person. A service can fail this test without knowing anyone's legal identity. Whenever someone calls data “anonymous,” ask: anonymous *to whom*, given *what other information*? [15]
+
+## Sources
+
+[1] NIST, Relationship Between Cybersecurity and Privacy: https://www.nccoe.nist.gov/relationship-between-cybersecurity-and-privacy
+
+[2] NIST CSRC Glossary, Anonymity: https://csrc.nist.gov/glossary/term/anonymity
+
+[3] GDPR, especially Recital 26: https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng
+
+[4] Stanford Encyclopedia of Philosophy, Privacy: https://plato.stanford.edu/entries/privacy/
+
+[5] European Commission, EU data-protection legal framework: https://commission.europa.eu/law/law-topic/data-protection/legal-framework-eu-data-protection_en
+
+[6] UK Information Commissioner's Office, Privacy-enhancing technologies (draft guidance, used here for technical examples): https://ico.org.uk/media2/migrated/4021464/chapter-5-anonymisation-pets.pdf
+
+[7] NIST SP 800-226, Guidelines for Evaluating Differential Privacy Guarantees: https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-226.pdf
+
+[8] NIST SP 800-63-4, Digital Identity Guidelines: https://pages.nist.gov/800-63-4/sp800-63.html
+
+[9] Microsoft Learn, Threat Modeling Tool threats (STRIDE): https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats
+
+[10] LINDDUN, Privacy Threat Modeling: https://linddun.org/
+
+[11] LINDDUN, Privacy threat categories: https://linddun.org/linddun-go-categories/
+
+[12] LINDDUN PRO: https://linddun.org/pro/
+
+[13] European Data Protection Board, Guidelines 4/2019 on Data Protection by Design and by Default: https://www.edpb.europa.eu/documents/guideline/guidelines-42019-on-article-25-data-protection-by-design-and-by-default_en
+
+[14] Deng et al., A Privacy Threat Analysis Framework (hard and soft privacy): https://cosicdatabase.esat.kuleuven.be/backend/publications/files/journal/1412
+
+[15] Pfitzmann and Hansen, A Terminology for Talking About Privacy by Data Minimization: https://www.ietf.org/archive/id/draft-hansen-privacy-terminology-00.html

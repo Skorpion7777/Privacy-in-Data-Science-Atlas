@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { chapters, concepts, getConceptById, sources } from '../content';
 import { guideChapters, parseGuide, sectionConcepts } from '../content/guide';
-import editorialSource from '../../privacy_data_science_corrected_study_guide.txt?raw';
+import editorialSource from '../../context/privacy_data_science_corrected_study_guide.txt?raw';
 
 describe('Publication and editorial source alignment', () => {
   it('publishes every numbered subsection and each chapter connection summary', () => {
@@ -14,7 +14,7 @@ describe('Publication and editorial source alignment', () => {
 
   it('keeps the decision checklist together without treating numbered questions as new chapters', () => {
     const final = chapters[7];
-    expect(chapters.map((chapter) => chapter.number)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
+    expect(chapters.slice(0, 8).map((chapter) => chapter.number)).toEqual([1, 2, 3, 4, 5, 6, 7, 8]);
     expect(final.sections.map((section) => section.id)).toEqual(['ch8-framework', 'ch8-example', 'ch8-connections']);
     const checklist = final.sections[0].paragraphs.join('\n');
     expect(checklist).toContain('1. Purpose:');
@@ -23,7 +23,7 @@ describe('Publication and editorial source alignment', () => {
   });
 
   it('retains paragraph text exactly and does not publish the source key as chapter prose', () => {
-    for (const chapter of chapters) {
+    for (const chapter of chapters.slice(0, 8)) {
       for (const section of chapter.sections) {
         for (const paragraph of section.paragraphs) {
           expect(editorialSource.replace(/\r\n/g, '\n')).toContain(paragraph);
@@ -31,7 +31,7 @@ describe('Publication and editorial source alignment', () => {
         }
       }
     }
-    expect(parseGuide(editorialSource.replace(/\r?\n/g, '\r\n'))).toEqual(guideChapters);
+    expect(parseGuide(editorialSource.replace(/\r?\n/g, '\r\n'))).toEqual(guideChapters.slice(0, 8));
   });
 
   it('links every concept to a real section in its chapter', () => {
@@ -52,5 +52,9 @@ describe('Publication and editorial source alignment', () => {
       for (const reference of JSON.stringify(chapter.sections).matchAll(/\[(S\d+)\]/g)) expect(sourceIds.has(reference[1])).toBe(true);
     }
     expect(JSON.stringify(concepts)).not.toMatch(/flashcard|original card|The note’s/);
+    const chaptersJson = JSON.stringify(chapters);
+    expect(chaptersJson).not.toMatch(/\[web:\d+\]/);
+    expect(chaptersJson).not.toMatch(/Coverage of the original cards/i);
+    expect(chaptersJson).not.toMatch(/flashcard|original card/i);
   });
 });

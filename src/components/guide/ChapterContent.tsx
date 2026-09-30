@@ -1,6 +1,6 @@
 import { BookOpen, Clock } from 'lucide-react';
-import { Chapter, getConceptById } from '../../content';
-import { EditorialText } from './EditorialText';
+import { Chapter, chapters, getConceptById } from '../../content';
+import { EditorialText } from '../EditorialText';
 
 interface ChapterContentProps {
   chapter: Chapter;
@@ -11,7 +11,7 @@ interface ChapterContentProps {
 export const ChapterContent = ({ chapter, onSelectConcept, onNavigateToAtlasWithCluster }: ChapterContentProps) => (
   <article className="guide-article">
     <header className="guide-chapter-header">
-      <div className="guide-chapter-meta"><span className="eyebrow">Field guide · Chapter {chapter.number} of 8</span><span><Clock size={14} /> {chapter.estimatedMinutes} min read</span></div>
+      <div className="guide-chapter-meta"><span className="eyebrow">Field guide · Chapter {chapter.number} of {chapters.length}</span><span><Clock size={14} /> {chapter.estimatedMinutes} min read</span></div>
       <h1 className="editorial-title">{chapter.title}</h1>
       <p className="guide-summary">{chapter.summary}</p>
       {chapter.number !== 8 && <button className="text-button" type="button" onClick={() => onNavigateToAtlasWithCluster(chapter.clusterId)}><BookOpen size={16} /> Browse this theme in the atlas →</button>}

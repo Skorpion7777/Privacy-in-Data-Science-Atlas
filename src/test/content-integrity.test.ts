@@ -12,8 +12,8 @@ import {
 } from '../content';
 
 describe('Content Integrity & Referential Completeness', () => {
-  it('should have all 8 defined clusters', () => {
-    expect(clusters.length).toBe(8);
+  it('should have all 13 defined clusters', () => {
+    expect(clusters.length).toBe(13);
     const expectedClusters = [
       'foundations-of-privacy',
       'gdpr-data-governance',
@@ -23,6 +23,11 @@ describe('Content Integrity & Referential Completeness', () => {
       'bias-measurement',
       'fairness-justice',
       'high-stakes-applications',
+      'ethical-reasoning',
+      'ethical-frameworks',
+      'decision-making',
+      'influence-and-nudging',
+      'threat-modeling',
     ];
     const actualClusterIds = clusters.map((c) => c.id);
     expect(actualClusterIds).toEqual(expect.arrayContaining(expectedClusters));
@@ -82,10 +87,10 @@ describe('Content Integrity & Referential Completeness', () => {
     }
   });
 
-  it('should have 8 ordered chapters matching the study guide structure', () => {
-    expect(chapters.length).toBe(8);
+  it('should have 14 ordered chapters matching the context guides structure', () => {
+    expect(chapters.length).toBe(14);
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 14; i++) {
       const ch = chapters[i];
       expect(ch.number).toBe(i + 1);
       expect(ch.sections.length).toBeGreaterThan(0);
@@ -97,8 +102,8 @@ describe('Content Integrity & Referential Completeness', () => {
     }
   });
 
-  it('should contain all 11 authoritative sources [S1] to [S11]', () => {
-    expect(sources.length).toBe(11);
+  it('should contain all 11 authoritative sources [S1] to [S11] plus extensions', () => {
+    expect(sources.length).toBeGreaterThanOrEqual(11);
     for (let i = 1; i <= 11; i++) {
       const id = `S${i}`;
       const src = getSourceById(id);

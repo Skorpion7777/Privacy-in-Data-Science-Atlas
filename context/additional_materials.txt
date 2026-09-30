@@ -1,0 +1,345 @@
+DATA PRIVACY: ETHICS, DECISION-MAKING AND ALGORITHMIC INFLUENCE
+Corrected study guide
+==============================================================
+
+Scope
+-----
+These notes focus on the ethical foundations of privacy and data-driven influence, examining how decisions are justified, the limits of human judgment, and who is accountable for algorithmic systems.
+
+These notes are mainly about the ethical foundations of privacy and data-driven influence. They are not a complete course in privacy engineering or data-protection law. Philosophical theories and critiques are identified as such; they are not presented as established scientific facts.
+
+The order is deliberate: learn how to reason about a decision, compare ethical frameworks, understand the limits of human judgment, then examine how data systems use those limits and who must answer for the results.
+
+
+1. ETHICAL REASONING
+====================
+
+1.1 Ethics, morality and law
+---------------------------
+Ethos is a Greek term associated with character, custom or habit. It explains the origin of the word 'ethics', not the scope of the discipline.
+
+Ethics is the systematic study of how we ought to act, what we owe others, and what makes a life or institution good. Morality refers to norms, values and judgments about right and wrong. In ordinary speech the terms often overlap; there is no universal rule that ethics means principles while morals means conduct.
+
+Law consists of rules recognised within a legal system and backed by its institutions. Legal permission does not settle moral justification. A legally permissible use of data can still be unfair or exploitative. Conversely, disagreement with a law does not remove the obligation to understand and comply with it.
+
+1.2 Reasoning and reasons
+-------------------------
+Reasoning means using reasons to reach a supported conclusion rather than merely reporting a preference.
+
+Theoretical reasoning concerns what to believe. Epistemic reasons support or undermine a belief: evidence that a system exposes personal information is a reason to believe it creates a privacy risk.
+
+Practical reasoning concerns what to do. Practical reasons support or oppose an action: the risk of exposing personal information is a reason to change or abandon a proposed deployment. Moral reasoning is practical reasoning about what is morally required, permitted or forbidden.
+
+A defensible moral argument needs reasons others can examine. It need not persuade every rational person: reasonable people can disagree about values, evidence and their relative importance. Public justification is especially central to contractualist approaches.
+
+1.3 Facts and ethical judgments
+-------------------------------
+Separate two questions:
+- Factual: What does the system do, how reliably, and with what consequences?
+- Ethical: Which consequences, rights and obligations matter, and what should we do about them?
+
+Empirical investigation informs the first question; moral reasoning addresses the second. Neither works well in isolation. Facts alone do not tell us how much privacy to trade for convenience, and ethical reasoning based on false facts will mislead us.
+
+Example: 'This model improves a service' is an empirical claim. 'The improvement justifies monitoring everyone who uses the service' needs a separate moral argument.
+
+1.4 Moral intuitions and principles
+-----------------------------------
+A moral intuition is an immediate judgment about a morally relevant case, often made before explicit reasoning. Intuitions vary between people and can conflict within one person. They are starting points for inquiry, not guaranteed perceptions of moral facts. Treating them as direct moral knowledge assumes a disputed philosophical position.
+
+A moral principle is a general standard for evaluating conduct, such as respecting persons or avoiding unjustified harm. Principles organise judgments, but they are not necessarily axioms derived mechanically from intuitions.
+
+Reflective equilibrium is the process of revising particular judgments, general principles and background beliefs until they fit together under critical scrutiny. Sometimes the principle changes; sometimes the initial judgment does. Coherence is a method of justification, not proof that a view is correct.
+
+1.5 Ethical dilemmas
+---------------------
+An ethical conflict arises when morally important considerations pull in different directions. A genuine moral dilemma, in the stricter philosophical sense, involves incompatible requirements with neither overriding the other. Whether genuine dilemmas exist is disputed.
+
+The alternatives need not be equally undesirable. A lack of public consensus does not establish that there is no justified answer. Some apparent dilemmas disappear when facts are clarified, obligations are ranked, or a third option is found.
+
+Example: a duty to protect confidential data may conflict with a duty to prevent serious harm. The question is not simply which option feels worse, but what each duty requires in the circumstances.
+
+
+2. ETHICAL FRAMEWORKS
+=====================
+
+2.1 Consequentialism
+--------------------
+Consequentialism grounds moral evaluation in consequences. In maximising act consequentialism, an action is right if it produces the best consequences among the available alternatives. This is an influential version, not the definition of every consequentialist theory.
+
+Consequentialism does not necessarily equate the good with happiness. A theory may value well-being, preference satisfaction or other goods. It must specify both what counts as good and how outcomes are compared.
+
+A consequentialist assessment:
+1. Identify realistic alternatives, including doing nothing and collecting less data.
+2. Estimate benefits and harms for everyone affected, including longer-term effects.
+3. State uncertainties and compare outcomes using the theory's account of value.
+4. Select the option favoured by that account.
+
+Perfect foresight is not required for an expected-consequence assessment. The hard questions are how to estimate uncertain effects, compare different goods, and account for harms that aggregate benefits can obscure. Distinguish actual consequences from the consequences reasonably expected at the time.
+
+2.2 Utilitarianism and impartiality
+-----------------------------------
+Utilitarianism is a family of consequentialist theories that evaluates actions or rules by their contribution to overall welfare. Classical utilitarianism understands welfare in terms of pleasure and the absence of pain. Other forms use preferences or broader accounts of well-being.
+
+The standard total-welfare version seeks the greatest overall welfare, not simply a benefit for the greatest number. A small improvement for many people does not automatically outweigh severe harm to a few. The size of the benefits and harms matters.
+
+Impartiality means giving equal consideration to comparable interests, regardless of whose interests they are. It does not require identical treatment or forbid every act benefiting family and friends. Special relationships can have consequences that matter; what is excluded is treating one's own welfare as intrinsically more valuable.
+
+A central objection is that aggregation can justify sacrificing an individual's interests for a larger total benefit. Privacy decisions therefore require attention to who receives the benefit and who bears the risk, not only the total score.
+
+2.3 Mill's higher and lower pleasures
+-------------------------------------
+John Stuart Mill distinguishes pleasures of higher faculties—intellect, imagination, feeling and moral sentiment—from bodily pleasures. His claim is that quality matters as well as quantity, not that bodily pleasure has no value. He appeals to the preferences of people acquainted with both kinds. This is Mill's account, not a classification accepted by all utilitarians.
+
+2.4 Deontology
+---------------
+Deontological ethics evaluates conduct through duties, rights and constraints that are not reducible to maximising consequences. Some actions may be forbidden even if they would produce better overall outcomes.
+
+It is not merely about following a process or having good intentions. The kind of act, the rights involved, the agent's duties and, in some theories, the motive all matter. A good intention does not automatically make an action permissible.
+
+Deontological theories differ. Some defend absolute prohibitions; others recognise duties that can be overridden when they conflict. Resolving conflicts is a challenge, but not every theory lacks an account of how to do so.
+
+Privacy example: promising confidentiality creates a reason not to disclose information that cannot be reduced to the predicted benefit of disclosure.
+
+2.5 Kant's categorical imperative
+----------------------------------
+A hypothetical imperative applies conditionally: if you want a particular end, take the means to achieve it. A categorical imperative applies unconditionally to rational agents, regardless of their particular desires. 'Categorical' does not mean 'instantly'.
+
+A maxim is the principle on which an agent acts: what they intend to do, in what circumstances, and for what purpose.
+
+Universal-law formulation: act only on a maxim that you can at the same time will as a universal law. Ask whether everyone acting on that maxim is coherently conceivable, and whether such a world can rationally be willed. This is not just a prediction that widespread behaviour would have bad consequences.
+
+Humanity formulation: treat humanity, in yourself and others, always as an end and never merely as a means. The word 'merely' matters. Cooperation routinely involves people serving one another's purposes. The objection is treating a person only as an instrument, without due regard for their agency and ends.
+
+Privacy example: misleading people about data collection to obtain their agreement treats their decision-making as an obstacle to bypass rather than something to respect.
+
+In Kant's ethics, acting consistently with duty and acting from duty are distinct. An action can conform to duty without having the distinctive moral worth of an action motivated by respect for duty.
+
+2.6 Virtue ethics
+------------------
+Virtue ethics places character and practical wisdom at the centre of moral evaluation. A common account asks what a virtuous person would characteristically do in the circumstances. It does not ignore consequences or rules; it gives virtues the foundational role.
+
+A virtue is a developed disposition to notice, value, feel and act well: honesty, justice and courage are examples. It is relatively stable, not fixed beyond change. Virtue involves judgment and motivation, not merely a useful skill or repeated behaviour.
+
+Virtues can be cultivated through practice, education and reflection. Natural dispositions may contribute, so 'cultivated, not born' is too absolute. Good intentions also need practical wisdom: understanding what matters and how to act effectively in a particular situation.
+
+Aristotle's eudaimonia is better understood here as flourishing or living well over a life, not simply feeling happy or having a peaceful soul. Virtuous activity is central to it; favourable external circumstances also matter in Aristotle's account.
+
+Privacy example: an honest scientist reports the limits of a privacy claim; a courageous one challenges a harmful deployment even when it is commercially attractive.
+
+2.7 Social contract theories
+-----------------------------
+Social contract theories justify political authority or moral rules through an actual or hypothetical agreement. They are not simply the claim that society rests on tacit agreements. An imagined agreement can be a test of justification rather than a historical account of how a society formed. Different theories specify different parties, conditions and purposes.
+
+Contractarianism grounds cooperation in rational mutual advantage: why should agents accept constraints when cooperation can advance their interests? This is more precise than calling it 'selfishness'.
+
+Contractualism, in T. M. Scanlon's influential version, asks whether conduct is permitted by principles that no one could reasonably reject as a basis for informed, unforced general agreement. The central concern is justification to other people, not a bargain that maximises one's own payoff. Reasonable rejection is not the same as any actual objection.
+
+The idea that morality must benefit self-interested agents belongs to particular approaches to moral justification. It is not a requirement accepted by every social contract theory or every moral theory.
+
+2.8 Rawls's veil of ignorance
+------------------------------
+John Rawls's original position is a hypothetical setting for choosing principles of justice fairly. Behind its veil of ignorance, parties do not know their social position, personal characteristics or conception of the good. They still know general facts about people and societies.
+
+The point is to prevent them from tailoring principles to their own advantages. It does not remove all knowledge, eliminate all self-interest, or supply an automatic answer to every policy question.
+
+Privacy application: would you accept this data policy without knowing whether you would be a company owner, an ordinary user, or someone especially vulnerable to misuse? This is an adaptation of Rawls's method, not a claim that he formulated a privacy policy test.
+
+
+3. HUMAN DECISION-MAKING
+========================
+
+3.1 Optimisation and bounded rationality
+----------------------------------------
+Optimisation means selecting the best feasible option according to a specified objective. In decision-making under risk, expected utility can combine the value of possible outcomes with their probabilities. Optimisation does not require certain knowledge of the future. It does require a sufficiently specified objective, alternatives and assumptions.
+
+Rationality is broader than optimisation. An impeccably computed answer can still optimise the wrong goal or rely on poor assumptions.
+
+Bounded rationality concerns decision-making under limits of information, time and computational capacity. People cannot always identify every alternative or calculate every consequence. Time pressure, incomplete information, limited resources and conflicting goals constrain deliberation. These limits do not make every shortcut irrational.
+
+Satisficing means looking for an option that meets an acceptable threshold rather than searching for the best possible one. It is not just accepting the first option encountered; the threshold matters. Under constraints, stopping the search can be sensible.
+
+3.2 Intuitive and deliberate judgment
+--------------------------------------
+Dual-process accounts distinguish relatively fast, automatic judgment from slower, more effortful deliberation. These are useful descriptions, not two neatly separated physical systems or an exhaustive theory of moral judgment.
+
+Fast judgment is not always emotional or wrong. Deliberation is not automatically correct. Skilled intuition can be useful, and careful reasoning can defend a mistaken starting point. Context, attention and the accessibility of information affect both.
+
+3.3 Heuristics and biases
+-------------------------
+A heuristic is a simplifying rule or shortcut. A bias is a systematic tendency that can distort judgment relative to a relevant standard. A heuristic can be useful in one setting and misleading in another.
+
+Representativeness: judging probability by similarity to a stereotype or prototype. Errors arise when resemblance substitutes for relevant probability information, such as base rates.
+Example: 'This person fits the profile' is not enough to establish that a rare event is likely.
+
+Availability: judging frequency or likelihood by how easily examples come to mind. It becomes misleading when memorable examples are mistaken for representative evidence.
+Example: a widely reported breach can dominate risk perception even when less visible failures are more common.
+
+Confirmation bias: preferentially seeking, interpreting or retaining evidence that supports an existing belief, while neglecting or discounting contrary evidence. It need not be deliberate, and the belief need not be one the person wants to be true.
+Example: investigating only cases that support the claim that a system is safe.
+
+Wishful thinking: allowing a desired outcome to influence what one believes is true or likely. It should be distinguished from the affect heuristic.
+Example: believing users understand a privacy notice because the project needs their agreement.
+
+The affect heuristic is different: positive or negative feelings influence judgments of risk and benefit. Emotion-based judgment is broader than believing what one wishes were true.
+
+Conjunction fallacy: judging 'A and B' as more probable than A alone. The conjunction is a subset of A, so P(A and B) <= P(A). The error is not that every detailed event is less probable than every broadly described event; the events must have this logical relationship.
+Example: 'The account was compromised and its data sold' cannot be more probable than 'The account was compromised'.
+
+Framing effects: equivalent descriptions of a decision lead to different judgments or choices. A gain frame and a loss frame can emphasise different features of the same outcome. Not every change of setting counts as a framing effect: the underlying information or options might genuinely differ.
+
+3.4 Improving a decision
+------------------------
+As a practical response to these limitations:
+- Write down the objective, constraints and uncertainty before comparing options.
+- Look for evidence that would disprove your preferred conclusion.
+- Check base rates rather than relying on a vivid example.
+- Describe both the benefit gained and the protection lost.
+- Ask whose experience is missing from the evaluation.
+
+These are safeguards for reasoning, not guarantees against error.
+
+
+4. DATA SYSTEMS, INFLUENCE AND PRIVACY
+=====================================
+
+4.1 Big data: analysis is not influence
+---------------------------------------
+There is no single universal definition of big data. In the framework used here, it combines information-processing technology—hardware and software—with a process of finding patterns, building predictive analytics and applying them to new data. Hardware alone is not the definition.
+
+Large-scale analysis can reveal patterns that ordinary human inspection would miss. That does not make every pattern useful or justify acting on it.
+
+Keep two activities distinct:
+- Analysis: using data to produce knowledge or predictions.
+- Behavioural influence: using those results to shape what people see, choose or do.
+
+Big-data techniques do not inherently seek to influence people. Karen Yeung's critique focuses on systems that use them for that purpose, especially commercial decision-guidance systems.
+
+4.2 Regulation and control
+---------------------------
+In regulatory-governance scholarship, regulation includes organised attempts to manage behaviour or risk in pursuit of objectives. Regulators need not be state agencies; firms and other organisations can also exercise regulatory control. This is broader than legislation.
+
+A common framework identifies three functions:
+1. Information gathering and monitoring: observe the relevant behaviour or conditions.
+2. Standard setting: determine the objective or desired state.
+3. Behaviour modification: intervene to move behaviour towards that state.
+
+This is an analytical framework, not a theorem that every regulator performs all three equally. In a platform, the objective, telemetry and interface can together form a mechanism of control. Calling something regulation in this sense does not establish that it is legitimate.
+
+4.3 Automated decisions and decision guidance
+----------------------------------------------
+An automated decision system produces a decision without a human making that individual decision. Humans still choose its objectives, build it, supply or select data, and decide where to deploy it. Input need not come directly from the affected user.
+
+A decision-guidance system changes the information or choice environment while leaving the person to make the immediate choice. Search rankings and recommendations are examples. Formal freedom to choose does not imply freedom from influence.
+
+Profiling, under the GDPR, is automated processing of personal data to evaluate personal aspects, such as preferences or behaviour. Profiling and decision-making are distinct: profiling may inform a human decision or an automated one.
+
+Article 22 concerns decisions based solely on automated processing that have legal or similarly significant effects. It does not cover every automated recommendation or all profiling. It contains exceptions and safeguards; neither 'all automation is forbidden' nor 'a human click makes it acceptable' is a sound summary.
+
+4.4 Choice architecture and nudges
+-----------------------------------
+Choice architecture is the way options and information are arranged: defaults, ordering, visibility and friction can all affect decisions.
+
+In the classic Thaler–Sunstein definition, a nudge predictably alters behaviour without forbidding options or significantly changing economic incentives. This definition describes a mechanism, not its moral quality. Keeping an option technically available is not enough to establish meaningful autonomy.
+
+Knowledge-based nudges influence behaviour through information, salience or reminders. Action-based nudges influence behaviour through defaults, convenience or the effort needed to choose. These are useful categories, not an exhaustive or universally fixed taxonomy.
+
+Teaching examples:
+- Knowledge-based: a short notice explaining what optional data collection actually enables.
+- Action-based: making the less intrusive option easy to select.
+
+'Better choice' always needs a beneficiary and a justification. Better for the user is not necessarily better for the platform.
+
+4.5 Hypernudging and feedback
+-----------------------------
+Yeung calls data-driven choice architectures 'hypernudges' when they are networked, dynamic and continuously updated. Their defining feature is not merely discovering hidden correlations; it is using ongoing data analysis to adapt the environment in which decisions are made.
+
+The feedback loop has three connected parts:
+1. Revise the individual's choice environment using incoming data.
+2. Feed observed responses back to the choice architect.
+3. Monitor and refine behaviour at the population level.
+
+A recommendation can change behaviour, and that behaviour can become input for the next recommendation. The person makes a choice, but the system helps shape the conditions of that choice.
+
+A platform can operate this process at large scale while personalising it for each person. It is not necessarily one identical nudge sent to millions of users. 'Self-contained' is also too strong: these systems interact with people, institutions and environments.
+
+4.6 Three critiques of nudging
+------------------------------
+Illegitimate purpose: the choice architect may pursue ends that cannot be justified to those affected, or advance its own interests at their expense.
+
+Manipulative mechanism: an intervention may exploit cognitive vulnerabilities or steer a person without adequate regard for their agency. A beneficial purpose does not automatically justify the means. Not every nudge is deceptive; deception is one possible objection.
+
+Opacity and accountability: people may not know how they are being influenced, what objective drives the intervention, or how to challenge it. A technically interpretable model can still sit inside an opaque institution.
+
+Distinctions between 'active' and 'passive' manipulation are best treated as analytical shorthand, not rigid definitions. Keep purpose, mechanism and accountability separate so that each can be evaluated.
+
+4.7 Digital gerrymandering
+---------------------------
+In this context, digital gerrymandering means using a platform's data and control over information exposure to steer electoral behaviour. It is an analogy to political manipulation, not necessarily a redrawing of electoral districts.
+
+Information gerrymandering is a related concept: the structure of information flow in a social network can skew perceptions of how others will vote and thereby affect collective decisions.
+
+These concepts identify mechanisms and risks. They do not prove that every platform controls election outcomes or that every attempt at persuasion succeeds.
+
+4.8 Privacy self-management
+---------------------------
+Privacy self-management is the model in which individuals use notices, consent and rights to decide how their data may be handled. The problem is not that individual choice has no value. It is that choice alone cannot carry the full burden of protection.
+
+People rarely have the time, information or bargaining power to assess complex downstream uses. Harms can emerge from aggregation across many transactions that each appeared harmless. A decision made at collection time may not meaningfully anticipate later uses.
+
+Agreeing to data collection does not establish agreement to every form of behavioural influence. Consent to data sharing is not consent to deception. Nor does a click, by itself, establish that consent is informed and freely given.
+
+The GDPR is not merely a notice-and-consent regime. Consent is one lawful basis, not the only one. Purpose limitation, data minimisation, fairness, security and accountability remain relevant obligations; consent does not switch them off.
+
+4.9 The legal subject and situated autonomy
+--------------------------------------------
+Describing a context-free rational self, detached from the body, should not be understood as a general definition of a legal person. It represents a philosophical critique of an abstract liberal picture of the individual. It is not a claim that contemporary law universally endorses an immaterial self.
+
+The critique asks whether an emphasis on individual choice overlooks how relationships, institutions and technologies shape a person's capacity to choose.
+
+A situated account of autonomy considers the conditions under which decisions are made: understanding, practical alternatives, dependencies and susceptibility to influence. Yeung draws on science and technology studies and points to relational autonomy as a useful alternative perspective.
+
+Design implication: do not evaluate privacy only by asking whether an opt-out exists. Ask whether people can understand it, use it, and refuse without unjustified pressure.
+
+
+5. RESPONSIBILITY AND PROJECT REVIEW
+====================================
+
+5.1 Responsibility, answerability and blame
+-------------------------------------------
+Moral responsibility concerns whether an agent is appropriately answerable for conduct and whether reactions such as praise or blame are warranted. Causing an outcome, holding a role, being legally liable and deserving blame are related but distinct matters.
+
+Theories differ over what grounds responsibility. Control, awareness, relevant capacities and responsiveness to reasons are recurring considerations. Mere involvement is not enough to settle how much responsibility someone bears.
+
+Responsibility is action-guiding: roles and obligations tell us what we must attend to before harm occurs. Practices of answerability can support trust and cooperation. But capacity for full moral responsibility is not a condition for having moral worth or rights.
+
+5.2 Why hold people responsible?
+---------------------------------
+Two important approaches are:
+- Consequence-based: practices of holding people responsible are justified by their effects, such as preventing harm, encouraging repair or improving conduct.
+- Desert-based: praise or blame is appropriate because of what the agent did and how they did it, not merely because the reaction produces desirable effects.
+
+These are not the only approaches. Relational accounts also examine what we owe one another when trust or expectations are violated. Do not confuse improving outcomes with proving that a particular person deserves blame.
+
+5.3 Accountability for a data system
+-------------------------------------
+An algorithm is not a substitute for an accountable organisation. For practical review, trace who chose the objective, authorised collection, designed the interface, approved deployment and can change or stop the system. Yeung's concern is accountability for the exercise of power, not just access to technical details.
+
+Useful review questions:
+1. Purpose: What is the system trying to achieve, and for whom?
+2. Necessity: Could that purpose be achieved with less personal data or less intervention?
+3. Evidence: What supports the claimed benefit, and what would disprove it?
+4. Distribution: Who gains, who bears the risk, and whose perspective is missing?
+5. Rights: Which duties and legal constraints apply independently of the benefit?
+6. Agency: Are people informed, or are their vulnerabilities being exploited?
+7. Choice: Is refusal understandable and usable, not just technically available?
+8. Feedback: Does observed behaviour change later targeting or recommendations?
+9. Accountability: Who can review, challenge, repair or stop the system?
+10. Reassessment: What finding or complaint would trigger a change in deployment?
+
+This checklist is a synthesis of the guide, not a substitute for a formal legal or technical assessment.
+
+5.4 Putting responsibility into practice
+-------------------------
+An accountable team can explain why the system is needed, what evidence supports its benefits, whose interests it puts at risk, and which people can challenge or stop it. Those questions cannot be answered by a model accuracy score or a consent click alone.
+
+Keep the review open after launch. Complaints, changes in the people affected, and new uses of the data can change the answer to whether a system is justified. Assign someone the authority to act on that evidence before it arrives.

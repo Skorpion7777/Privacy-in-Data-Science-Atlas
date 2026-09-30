@@ -14,7 +14,7 @@ export const relationships: Relationship[] = [
     id: 'rel-info-spatial',
     sourceId: 'informational-privacy',
     targetId: 'spatial-privacy',
-    type: 'differs-from',
+    type: 'supports',
     label: 'interacts with',
     shortNote: 'A camera in the home invades spatial privacy and creates data; a prediction about reproductive health may affect informational and decisional privacy.',
   },
@@ -80,9 +80,9 @@ export const relationships: Relationship[] = [
     id: 'rel-auto-dun',
     sourceId: 'automated-decisions-article-22',
     targetId: 'cjeu-dun-and-bradstreet',
-    type: 'depends-on',
-    label: 'interpreted by',
-    shortNote: 'The CJEU’s 2025 Dun & Bradstreet decision clarified that controllers must explain the procedure and principles actually applied so a person can understand which personal data were used and how.',
+    type: 'supports',
+    label: 'has access duties clarified by',
+    shortNote: 'The CJEU’s 2025 Dun & Bradstreet decision clarified the Article 15(1)(h) access duty for covered automated decision-making: explain the procedure and principles actually applied, including which personal data were used and how.',
   },
   {
     id: 'rel-dpia-principles',
@@ -122,16 +122,16 @@ export const relationships: Relationship[] = [
     id: 'rel-dp-limits',
     sourceId: 'differential-privacy',
     targetId: 'dp-limits-and-interpretation',
-    type: 'is-often-confused-with',
-    label: 'qualified by limits in',
+    type: 'complicates',
+    label: 'has limits described in',
     shortNote: 'DP bounds the additional influence of participation on a release. It does not rule out all real-world harms or conclusions about a group.',
   },
   {
     id: 'rel-eps-dp',
     sourceId: 'epsilon-and-delta',
     targetId: 'differential-privacy',
-    type: 'depends-on',
-    label: 'calibrates bound of',
+    type: 'governs',
+    label: 'sets the parameters for',
     shortNote: 'Smaller epsilon provides stronger privacy usually at cost to accuracy; delta is an additional relaxation needing explicit justification.',
   },
   {
@@ -146,8 +146,8 @@ export const relationships: Relationship[] = [
     id: 'rel-arch-dp',
     sourceId: 'central-vs-local-dp',
     targetId: 'differential-privacy',
-    type: 'is-a-type-of',
-    label: 'trust-model variant of',
+    type: 'supports',
+    label: 'compares trust models for',
     shortNote: 'Central DP protects released outputs from a trusted data holder; local DP randomizes before the holder sees the data, with different utility trade-offs.',
   },
   {
@@ -381,5 +381,174 @@ export const relationships: Relationship[] = [
     id: 'rel-clinical-many', sourceId: 'clinical-trust-and-explainability', targetId: 'problem-of-many-hands',
     type: 'is-an-example-of', label: 'illustrates',
     shortNote: 'A clinician, hospital, vendor, and developer can share responsibility. The person clicking accept is not automatically responsible for everything.',
+  },
+
+  // ======================================================================
+  // NEW RELATIONSHIPS — connecting new concepts
+  // ======================================================================
+
+  // Ethical frameworks inter-relationships
+  {
+    id: 'rel-conseq-deont', sourceId: 'consequentialism', targetId: 'deontological-ethics',
+    type: 'can-conflict-with', label: 'can conflict with',
+    shortNote: 'Consequentialism may permit an action for its outcomes that deontology forbids based on duties or rights.',
+  },
+  {
+    id: 'rel-conseq-util', sourceId: 'utilitarianism-and-impartiality', targetId: 'consequentialism',
+    type: 'is-a-type-of', label: 'is a type of',
+    shortNote: 'Utilitarianism is a family of consequentialist theories focused specifically on overall welfare.',
+  },
+  {
+    id: 'rel-virtue-conseq', sourceId: 'virtue-ethics', targetId: 'consequentialism',
+    type: 'differs-from', label: 'differs from',
+    shortNote: 'Virtue ethics centres on character and practical wisdom rather than calculating best consequences.',
+  },
+  {
+    id: 'rel-virtue-deont', sourceId: 'virtue-ethics', targetId: 'deontological-ethics',
+    type: 'differs-from', label: 'differs from',
+    shortNote: 'Virtue ethics gives virtues the foundational role rather than duties, though it does not ignore them.',
+  },
+  {
+    id: 'rel-kant-deont', sourceId: 'categorical-imperative', targetId: 'deontological-ethics',
+    type: 'supports', label: 'is a principle within',
+    shortNote: 'The categorical imperative is Kant\'s foundational principle within deontological ethics.',
+  },
+  {
+    id: 'rel-veil-rawls', sourceId: 'veil-of-ignorance', targetId: 'rawls-justice-as-fairness',
+    type: 'supports', label: 'is the method for',
+    shortNote: 'The veil of ignorance is the hypothetical setting Rawls uses to derive his principles of justice.',
+  },
+  {
+    id: 'rel-social-contract-veil', sourceId: 'social-contract-theories', targetId: 'veil-of-ignorance',
+    type: 'supports', label: 'includes Rawls’s use of',
+    shortNote: 'Rawls uses the veil of ignorance as a hypothetical device for choosing fair principles in his social contract approach.',
+  },
+
+  // Ethical reasoning connections
+  {
+    id: 'rel-facts-reasoning', sourceId: 'facts-and-ethical-judgments', targetId: 'reasoning-and-reasons',
+    type: 'supports', label: 'guides',
+    shortNote: 'Empirical reasons inform what to believe about a system; moral reasons help decide what ought to be done about it.',
+  },
+  {
+    id: 'rel-intuitions-dilemmas', sourceId: 'moral-intuitions-and-reflective-equilibrium', targetId: 'ethical-dilemmas',
+    type: 'supports', label: 'helps examine',
+    shortNote: 'Reflective equilibrium tests conflicting intuitions and principles; an initial clash does not by itself establish a genuine dilemma.',
+  },
+  {
+    id: 'rel-ethics-law-gdpr', sourceId: 'ethics-morality-law', targetId: 'gdpr-baseline-principles',
+    type: 'differs-from', label: 'asks questions beyond',
+    shortNote: 'Meeting GDPR duties matters, but legal compliance alone does not settle whether a particular data use is ethically justified.',
+  },
+
+  // Decision-making connections
+  {
+    id: 'rel-bounded-heuristics', sourceId: 'bounded-rationality-and-satisficing', targetId: 'heuristics-and-biases',
+    type: 'supports', label: 'helps explain the use of',
+    shortNote: 'Bounded rationality explains why people rely on heuristics — cognitive limits make exhaustive analysis impractical.',
+  },
+  {
+    id: 'rel-dualprocess-heuristics', sourceId: 'dual-process-judgment', targetId: 'heuristics-and-biases',
+    type: 'supports', label: 'helps examine',
+    shortNote: 'Fast judgments can use heuristics; whether they lead to systematic error depends on the task and context.',
+  },
+  {
+    id: 'rel-heuristics-statbias', sourceId: 'heuristics-and-biases', targetId: 'statistical-vs-social-bias',
+    type: 'can-distort', label: 'can contribute to',
+    shortNote: 'Human cognitive biases are one source of the biases that end up encoded in data and algorithmic systems.',
+  },
+  {
+    id: 'rel-bounded-selfmgmt', sourceId: 'bounded-rationality-and-satisficing', targetId: 'privacy-self-management',
+    type: 'complicates', label: 'undermines',
+    shortNote: 'Bounded rationality explains why privacy self-management fails: users lack time and capacity to evaluate complex data terms.',
+  },
+
+  // Influence and nudging connections
+  {
+    id: 'rel-nudge-hyper', sourceId: 'choice-architecture-and-nudging', targetId: 'hypernudging',
+    type: 'supports', label: 'is adapted in',
+    shortNote: 'Hypernudging extends basic nudging with continuous, data-driven, personalised adaptation.',
+  },
+  {
+    id: 'rel-hyper-autonomy', sourceId: 'hypernudging', targetId: 'situated-autonomy',
+    type: 'complicates', label: 'can constrain',
+    shortNote: 'Continually adapting what a person sees can change the conditions under which they choose, even when an opt-out remains available.',
+  },
+  {
+    id: 'rel-nudge-critiques', sourceId: 'nudging-critiques', targetId: 'choice-architecture-and-nudging',
+    type: 'complicates', label: 'questions the legitimacy of',
+    shortNote: 'Ask whose goal a nudge serves, how it influences people, and whether the influence can be understood and challenged.',
+  },
+  {
+    id: 'rel-selfmgmt-control', sourceId: 'privacy-self-management', targetId: 'control-account',
+    type: 'supports', label: 'tries to put into practice',
+    shortNote: 'Individual notices and settings are one way to exercise control, but limited time and bargaining power can make that control ineffective.',
+  },
+  {
+    id: 'rel-gerrymander-hyper', sourceId: 'digital-gerrymandering', targetId: 'hypernudging',
+    type: 'supports', label: 'can use',
+    shortNote: 'Political information exposure can be adapted to observed behavior, but digital gerrymandering need not always be an adaptive hypernudge.',
+  },
+  {
+    id: 'rel-situated-decisional', sourceId: 'situated-autonomy', targetId: 'decisional-privacy',
+    type: 'supports', label: 'enriches',
+    shortNote: 'Situated autonomy deepens the analysis of decisional privacy by examining whether choice conditions are actually met.',
+  },
+  {
+    id: 'rel-guidance-art22', sourceId: 'automated-decision-and-guidance-systems', targetId: 'automated-decisions-article-22',
+    type: 'is-often-confused-with', label: 'is often confused with',
+    shortNote: 'Not every decision-guidance system falls under Article 22; the article specifically covers solely automated decisions with legal or significant effects.',
+  },
+  {
+    id: 'rel-nudge-chilling', sourceId: 'hypernudging', targetId: 'chilling-effect',
+    type: 'can-create', label: 'can contribute to',
+    shortNote: 'Awareness of continuous behavioural monitoring and adaptation can produce chilling effects on expression and exploration.',
+  },
+
+  // Threat modeling connections
+  {
+    id: 'rel-stride-linddun', sourceId: 'stride', targetId: 'linddun',
+    type: 'differs-from', label: 'differs from',
+    shortNote: 'STRIDE addresses security threats (unauthorized access); LINDDUN addresses privacy threats (including authorised but inappropriate use).',
+  },
+  {
+    id: 'rel-security-privacy', sourceId: 'security-vs-privacy', targetId: 'data-protection-vs-privacy',
+    type: 'supports', label: 'parallels',
+    shortNote: 'Both distinctions make the same core point: protecting data from intruders is necessary but not sufficient for privacy.',
+  },
+  {
+    id: 'rel-pets-dp', sourceId: 'privacy-enhancing-technologies', targetId: 'differential-privacy',
+    type: 'supports', label: 'includes',
+    shortNote: 'Differential privacy is one of several PETs; it addresses statistical disclosure risk, while others address different threat types.',
+  },
+  {
+    id: 'rel-linddun-dpia', sourceId: 'linddun', targetId: 'engineering-governance-dpia',
+    type: 'supports', label: 'informs',
+    shortNote: 'A LINDDUN threat model can be a key input to a Data Protection Impact Assessment.',
+  },
+  {
+    id: 'rel-hardsoft-anon', sourceId: 'hard-and-soft-privacy', targetId: 'anonymity-vs-pseudonymity',
+    type: 'supports', label: 'offers design options alongside',
+    shortNote: 'Avoiding disclosure and governing disclosed data are different design approaches; neither maps one-to-one onto anonymity or pseudonymity.',
+  },
+  {
+    id: 'rel-unlinkability-anon', sourceId: 'unlinkability-and-anonymity-sets', targetId: 'anonymity-vs-pseudonymity',
+    type: 'supports', label: 'refines',
+    shortNote: 'Anonymity sets and unlinkability provide precise technical criteria for evaluating pseudonymisation and anonymisation claims.',
+  },
+  {
+    id: 'rel-threatmodel-governance', sourceId: 'threat-modeling-process', targetId: 'engineering-governance-dpia',
+    type: 'supports', label: 'feeds into',
+    shortNote: 'Threat modeling identifies the risks that a DPIA then assesses for necessity, proportionality and mitigations.',
+  },
+  {
+    id: 'rel-repudiation-stride-linddun', sourceId: 'repudiation-and-non-repudiation', targetId: 'linddun',
+    type: 'can-conflict-with', label: 'creates tension with',
+    shortNote: 'STRIDE wants non-repudiation for security; LINDDUN warns it can become a privacy threat when deniability is needed.',
+  },
+  {
+    id: 'rel-accountability-manyh', sourceId: 'accountability-for-data-systems', targetId: 'problem-of-many-hands',
+    type: 'supports', label: 'addresses',
+    shortNote: 'Structured accountability review answers the question of who is responsible that the problem of many hands makes difficult.',
   },
 ];

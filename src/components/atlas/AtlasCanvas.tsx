@@ -148,12 +148,12 @@ export const AtlasCanvas: React.FC<AtlasCanvasProps> = ({
         </aside>
       </section>
 
-      <section className="atlas-section" aria-labelledby="theme-heading">
+      <section className="atlas-section theme-picker" aria-labelledby="theme-heading">
         <div className="section-heading">
           <div>
             <p className="eyebrow">Choose a starting point</p>
             <h2 id="theme-heading">Explore by theme</h2>
-            <p>Each theme groups ideas from the field guide. Select one to focus the concept list.</p>
+            <p>Choose a theme to jump to its concepts.</p>
           </div>
           {clusterFilter && (
             <button className="button-secondary" type="button" onClick={() => onFilterCluster(null)}>
@@ -178,12 +178,12 @@ export const AtlasCanvas: React.FC<AtlasCanvasProps> = ({
                 aria-pressed={isActive}
                 onClick={() => handleChooseCluster(cluster.id)}
               >
-                <span className="theme-card-top">
-                  <span className="theme-index">0{index + 1}</span>
-                  <span className="theme-count">{count} concepts</span>
+                <span className="theme-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <span className="theme-card-copy">
+                  <strong>{cluster.name}</strong>
+                  <small>{count} concepts</small>
                 </span>
-                <strong>{cluster.name}</strong>
-                <small>{cluster.tagline}</small>
+                <ArrowRight className="theme-card-arrow" size={16} aria-hidden="true" />
               </button>
             );
           })}

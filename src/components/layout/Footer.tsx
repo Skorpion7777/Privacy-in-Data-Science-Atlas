@@ -14,7 +14,7 @@ export const Footer = ({ onNavigate, onFilterCluster }: FooterProps) => (
         <p>A guide to privacy, fairness, and the decisions that make data science responsible.</p>
         <p>For learning and reference.</p>
       </div>
-      {[clusters.slice(0, 4), clusters.slice(4)].map((group, index) => <div key={index}>
+      {[clusters.slice(0, Math.ceil(clusters.length / 2)), clusters.slice(Math.ceil(clusters.length / 2))].map((group, index) => <div key={index}>
         <h5>{index === 0 ? 'Privacy & understanding' : 'Responsibility & practice'}</h5>
         <nav className="footer-links" aria-label={index === 0 ? 'Privacy themes' : 'Practice themes'}>
           {group.map((cluster) => <button key={cluster.id} type="button" onClick={() => onFilterCluster(cluster.id)}>{cluster.name}</button>)}

@@ -6,7 +6,12 @@ export type ClusterId =
   | 'responsibility-dual-use'
   | 'bias-measurement'
   | 'fairness-justice'
-  | 'high-stakes-applications';
+  | 'high-stakes-applications'
+  | 'ethical-reasoning'
+  | 'ethical-frameworks'
+  | 'decision-making'
+  | 'influence-and-nudging'
+  | 'threat-modeling';
 
 export interface Cluster {
   id: ClusterId;

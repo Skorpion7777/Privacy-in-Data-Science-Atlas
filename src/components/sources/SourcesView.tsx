@@ -94,9 +94,9 @@ export const SourcesView: React.FC<SourcesViewProps> = ({ onSelectConcept }) => 
                 </div>
 
                 <a
-                  href={src.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={src.url || '?view=guide&chapter=ch9'}
+                  target={src.url ? '_blank' : undefined}
+                  rel={src.url ? 'noopener noreferrer' : undefined}
                   className="glass-card"
                   style={{
                     padding: '0.45rem 0.85rem',
@@ -107,10 +107,9 @@ export const SourcesView: React.FC<SourcesViewProps> = ({ onSelectConcept }) => 
                     gap: '5px',
                     color: 'var(--text-accent)',
                   }}
-                  title="Open external verified link"
                 >
-                  <span>Read source</span>
-                  <ExternalLink size={14} />
+                  <span>{src.url ? 'Read source' : 'Read in field guide'}</span>
+                  {src.url && <ExternalLink size={14} />}
                 </a>
               </div>
 

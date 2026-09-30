@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, Bookmark, BookOpen, Check, ExternalLink, Link, X } from 'lucide-react';
 import { getChapterById, getClusterById, getConceptById, getRelationshipsForConcept, getSourceById } from '../../content';
 import { useDialog } from '../../hooks/useDialog';
+import { EditorialText } from '../EditorialText';
 
 interface ConceptDetailProps {
   conceptId: string;
@@ -82,11 +83,11 @@ export const ConceptDetail: React.FC<ConceptDetailProps> = ({ conceptId, onClose
               <a href="#concept-sources">Sources</a>
             </nav>
             <section id="concept-explanation">
-              <h3>The idea</h3><p>{concept.expandedExplanation}</p>
-              <h3>Why it matters</h3><p>{concept.whyItMatters}</p>
-            </section>
-            {concept.example && <section className="concept-example"><h3>In practice</h3><p>{concept.example}</p></section>}
-            {concept.limitationsOrMisconceptions && <section className="callout-box callout-important"><h3>Keep in mind</h3><p>{concept.limitationsOrMisconceptions}</p></section>}
+               <h3>The idea</h3><EditorialText paragraphs={concept.expandedExplanation.split(/\n\s*\n/)} />
+               <h3>Why it matters</h3><EditorialText paragraphs={[concept.whyItMatters]} />
+             </section>
+             {concept.example && <section className="concept-example"><h3>In practice</h3><EditorialText paragraphs={[concept.example]} /></section>}
+             {concept.limitationsOrMisconceptions && <section className="callout-box callout-important"><h3>Keep in mind</h3><EditorialText paragraphs={[concept.limitationsOrMisconceptions]} /></section>}
             <section id="concept-connections">
               <div className="section-heading"><div><h3>Follow the connections</h3><p>Each link explains how the ideas connect.</p></div></div>
               <div className="connection-list">
@@ -112,7 +113,7 @@ export const ConceptDetail: React.FC<ConceptDetailProps> = ({ conceptId, onClose
               <div className="source-links">
                 {concept.sourceIds.map((id) => {
                   const source = getSourceById(id);
-                  return source ? <a key={id} href={source.url} target="_blank" rel="noreferrer">[{id}] {source.title} <ExternalLink size={13} aria-label="opens in a new tab" /></a> : null;
+                  return source ? <a key={id} href={source.url || '?view=guide&chapter=ch9'} target={source.url ? '_blank' : undefined} rel={source.url ? 'noreferrer' : undefined}>[{id}] {source.title} {source.url && <ExternalLink size={13} aria-label="opens in a new tab" />}</a> : null;
                 })}
               </div>
             </section>
