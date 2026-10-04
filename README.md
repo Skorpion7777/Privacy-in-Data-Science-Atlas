@@ -1,45 +1,72 @@
 # The Privacy Atlas
 
-An interactive, content-first guide to privacy, fairness, and responsible data science. The project turns a corrected university study guide into a visual knowledge atlas and a readable publication. It is **not** a gallery of flashcards: no photographs, scans, transcriptions, or original-card comparisons appear on the site.
+An interactive knowledge map and guided reader covering privacy, fairness, and responsible data science. The project restructures corrected university study material into an explorable web application with 84 concepts, 80 labeled relationships, 14 chapters, and 24 cited sources.
 
-## The idea
+## Goal
 
-Readers can explore concepts and their relationships in a curated knowledge graph, follow a chapter-based learning path, or open individual concepts for definitions, examples, limitations, and sources. The emphasis is on useful distinctions—such as what differential privacy does *not* guarantee—and on connections between technical, legal, and ethical ideas.
+Present a dense academic topic in a way that is genuinely useful — not a flashcard deck, not a slide dump. Readers can follow a linear guide, jump into any concept, or browse the full knowledge graph. Every explanation includes why it matters, an example, common misconceptions, and source references.
 
-## Core experiences
+## What it does
 
-- **Atlas:** A searchable, topic-first overview. Each theme starts with a short selection of concepts and can expand to the full list. An optional focused React Flow map shows a concept's incoming and outgoing relationships, including cross-theme links.
-- **Field guide:** Eight chapters with section navigation, previous/next controls, and links to concept explanations. Mobile readers use a compact chapter selector.
-- **Concept explorer:** Shareable explanations with examples, caveats, labeled relationships, a back trail, sources, and a link to read the chapter in context.
-- **Search and saved concepts:** Client-side discovery across concepts and chapters, with bookmarks stored in the browser. Press `/` or Ctrl/Cmd+K to search, and Escape to close a dialog.
+**Atlas** — A React Flow graph of all 84 concepts grouped into 13 thematic clusters (privacy foundations, GDPR, differential privacy, fairness, ethical reasoning, threat modeling, etc.). Nodes are filterable by cluster. Clicking a concept opens its detail view; edges show labeled relationships like *depends-on*, *can-conflict-with*, or *does-not-guarantee*.
 
-The editorial source is `privacy_data_science_corrected_study_guide.txt` in the project root. `src/content/guide.ts` parses it at build time through Vite's raw import, and `src/content/chapters.ts` supplies chapter metadata. The reading text stays synchronized with the editorial source. Concept summaries and relationship labels are curated in `src/content/concepts.ts` and `src/content/relationships.ts`; review those when changing the source's meaning. `sectionConcepts` links each concept to its corresponding reading section.
+**Guide** — 14 chapters parsed at build time from three curated source texts. Each chapter has section navigation, estimated reading time, and inline links to concept explanations. Chapters cover everything from privacy dimensions and GDPR articles through ethical frameworks, cognitive biases, and STRIDE/LINDDUN threat modeling.
 
-## Design and technology
+**Concept detail** — Each concept shows a concise definition, expanded explanation with editorial markup (bold, italic, inline citations), the reason it matters, an example, limitations/misconceptions, related concepts, and cited sources.
 
-The design uses warm off-white backgrounds, white reading surfaces, deep green accents, serif headings, and restrained translucent panels. Themes have distinct, readable accent colors. Responsive layouts, visible keyboard focus, native modal focus management, and reduced-motion support are built in.
+**Bookmarks** — Concepts can be bookmarked. Persisted to localStorage. Accessible from a dedicated view.
 
-The stack is **React + TypeScript + Vite**, with **React Flow (`@xyflow/react`)** for the atlas. Concepts, chapters, relationships, and references live in local, typed content files. The site is static: no backend, database, login, API key, or runtime AI service is needed.
+**Sources** — A browsable list of all 24 cited academic papers, regulations, and institutional publications, each with a contextual note explaining how the source is used.
 
-## Local development
+**Search** — Full-text client-side search across concept names, definitions, and explanations. Triggered with `/` or `Ctrl+K`. Results ranked by match quality (name → definition → body).
+
+## Tech stack
+
+| | |
+|---|---|
+| Framework | React 19, TypeScript |
+| Atlas | React Flow (`@xyflow/react`) |
+| Build | Vite 6 |
+| Tests | Vitest |
+| Icons | Lucide React |
+| Styling | Plain CSS with design tokens |
+| State | URL query parameters for navigation, localStorage for bookmarks |
+| Backend | None — fully static |
+
+## Content structure
+
+All content lives in typed TypeScript files under `src/content/`:
+
+- **`concepts.ts`** — 84 concepts, each with definition, explanation, examples, keywords, source references, and a position on the atlas canvas
+- **`clusters.ts`** — 13 thematic clusters with colors and layout positions
+- **`relationships.ts`** — 80 directed, labeled edges between concepts
+- **`sources.ts`** — 24 cited sources (papers, regulations, standards)
+- **`guide.ts`** — Parser that reads three raw `.txt` study guides from `context/` and outputs structured chapters and sections at build time
+- **`chapters.ts`** — Chapter metadata (titles, slugs, cluster associations, reading-time estimates)
+
+## Navigation
+
+Query-parameter based (`?view=guide&chapter=ch3&concept=differential-privacy`). Supports browser back/forward. Works on static hosts without rewrite rules. Default view is the atlas.
+
+## Tests
+
+Five test suites covering:
+
+- **Content integrity** — every concept has required fields, all relationship endpoints exist, cluster and source references resolve, guide atlas-links point to valid concepts
+- **Editorial rendering** — markup parser handles bold, italic, code, citations, headings, and nested markup
+- **Guide** — chapters have sections, atlas-links are valid, slugs are unique
+- **Navigation** — URL parsing, view switching, edge cases
+- **Search** — ranking correctness, case insensitivity
+
+## Running locally
 
 ```sh
 npm ci
-npm run dev
+npm run dev     # http://localhost:3000
 npm test
 npm run build
 ```
 
-The development server defaults to `http://localhost:3000`. `npm run preview` serves the production build. Tests cover content references, graph relationships, search, and publication alignment with the editorial text.
-
 ## Deployment
 
-The site is configured for **GitHub Pages**, built and deployed by GitHub Actions. Vite defaults to the relative base `./`, supporting both a project site (`USERNAME.github.io/REPOSITORY/`) and a user site (`USERNAME.github.io/`). Set `VITE_BASE_PATH` to override it. Navigation uses query parameters so concept and chapter links work on a static host without rewrite rules.
-
-## Project principles
-
-1. **Accuracy before spectacle:** No fabricated citations or oversimplified legal and technical guarantees.
-2. **Readable as well as explorable:** The graph complements, rather than replaces, a good reading experience.
-3. **Meaningful relationships:** Connections should explain dependencies, tensions, examples, and limits.
-4. **Content only:** No card imagery or archival interface.
-5. **Static and maintainable:** Easy to edit, test, and deploy from a GitHub repository.
+Configured for GitHub Pages via `vite build`. Base path defaults to `./` (works for both project and user sites). Override with `VITE_BASE_PATH` if needed.
